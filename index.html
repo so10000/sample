@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CL #13 | 名城大学 情報工学部</title>
+    <style>
+        /* ============================================
+           モダンデザイン (2026年度)
+           ============================================ */
+        :root {
+            --color-primary: #2563eb;
+            --color-primary-dark: #1e40af;
+            --color-accent: #f59e0b;
+            --color-danger: #dc2626;
+            --color-success: #10b981;
+            --color-bg: #f8fafc;
+            --color-bg-card: #ffffff;
+            --color-text: #1e293b;
+            --color-text-muted: #64748b;
+            --color-border: #e2e8f0;
+            --color-code-bg: #fef3c7;
+            --radius: 12px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-lg: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+            font-size: 16px; line-height: 1.8;
+            color: var(--color-text);
+            background: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .site-header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white; padding: 2.5rem 2rem; box-shadow: var(--shadow-lg);
+        }
+        .site-header .container { max-width: 1100px; margin: 0 auto; }
+        .site-header .university { font-size: 0.95rem; opacity: 0.85; margin: 0 0 0.5rem; letter-spacing: 0.1em; }
+        .site-header h1 { font-size: 2.2rem; margin: 0; font-weight: 700; letter-spacing: -0.02em; }
+        .site-header .subtitle { margin-top: 0.8rem; font-size: 1rem; opacity: 0.95; }
+        .site-header .face-badge {
+            display: inline-block; background: #1e3a8a; color: #dbeafe;
+            font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 999px;
+            margin-top: 0.6rem; letter-spacing: 0.05em;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        .toc { background: var(--color-bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.5rem 2rem; margin: 2rem auto; }
+        .toc h2 { margin: 0 0 1rem; font-size: 1.1rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+        .toc ol { columns: 2; column-gap: 2rem; margin: 0; padding-left: 1.5rem; }
+        .toc li { margin-bottom: 0.4rem; }
+        .toc a { color: var(--color-primary); text-decoration: none; font-weight: 500; }
+        .toc a:hover { text-decoration: underline; }
+
+        section {
+            background: var(--color-bg-card); border-radius: var(--radius); box-shadow: var(--shadow);
+            padding: 2rem 2.5rem; margin: 2rem auto; max-width: 1100px; scroll-margin-top: 1rem;
+        }
+        section h2 {
+            font-size: 1.6rem; margin: 0 0 1.5rem; padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--color-primary); color: var(--color-primary-dark);
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        section h2 .section-number {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 2.2rem; height: 2.2rem; border-radius: 50%;
+            background: var(--color-primary); color: white; font-size: 1rem; font-weight: 700; flex-shrink: 0;
+        }
+        section h3 { font-size: 1.2rem; margin: 1.8rem 0 0.8rem; color: var(--color-primary-dark); }
+        section h4 { font-size: 1.05rem; margin: 1.2rem 0 0.5rem; color: var(--color-text); }
+
+        ul, ol { padding-left: 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+        a { color: var(--color-primary); }
+
+        .callout { border-left: 4px solid var(--color-primary); background: #eff6ff; padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+        .callout.warning { border-left-color: var(--color-danger); background: #fef2f2; }
+        .callout.tip { border-left-color: var(--color-success); background: #ecfdf5; }
+        .callout.note { border-left-color: var(--color-accent); background: #fffbeb; }
+        .callout strong.label { display: inline-block; margin-right: 0.5rem; font-weight: 700; }
+
+        .assignment {
+            border: 2px solid var(--color-accent); background: #fffbeb; border-radius: var(--radius); padding: 1.2rem 1.5rem; margin: 1rem 0;
+        }
+        .assignment .badge {
+            display: inline-block; background: var(--color-accent); color: white;
+            font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 999px; letter-spacing: 0.05em;
+        }
+        .assignment h4 { margin: 0.5rem 0 0.5rem; color: #78350f; }
+        .assignment .deadline { color: var(--color-danger); font-weight: 600; font-size: 0.95rem; }
+
+        pre, code.inline {
+            font-family: "SF Mono", "Consolas", "Menlo", "Courier New", monospace;
+            background: var(--color-code-bg); border-radius: 6px; padding: 0.15rem 0.4rem; font-size: 0.95em;
+        }
+        pre { padding: 1rem 1.2rem; overflow-x: auto; border-left: 3px solid var(--color-accent); margin: 0.8rem 0; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+
+        .path { font-family: "SF Mono", "Consolas", "Menlo", "Courier New", monospace; font-weight: 700; color: #1d4ed8; }
+
+        table { border-collapse: collapse; margin: 1rem 0; width: 100%; background: white; border-radius: var(--radius); overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+        th { background: var(--color-primary); color: white; padding: 0.7rem 1rem; text-align: left; font-weight: 600; }
+        td { padding: 0.7rem 1rem; border-top: 1px solid var(--color-border); vertical-align: top; }
+        tr:nth-child(even) td { background: #f8fafc; }
+
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        figure { margin: 1rem 0; text-align: center; }
+        figure img { box-shadow: var(--shadow); }
+        figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--color-text-muted); }
+
+        .back-to-top { display: block; text-align: right; margin: 1rem 0; font-size: 0.9rem; }
+
+        /* スケジュール表 */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .schedule-grid .item {
+            background: #f1f5f9;
+            padding: 0.6rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .schedule-grid .item.remote {
+            background: #fef3c7;
+            border-left: 3px solid var(--color-accent);
+        }
+        .schedule-grid .item.exam {
+            background: #fee2e2;
+            border-left: 3px solid var(--color-danger);
+        }
+        .schedule-grid .item.current {
+            background: #bfdbfe;
+            border: 3px solid var(--color-primary);
+            font-weight: 700;
+        }
+        .schedule-grid .item strong {
+            display: block;
+            color: var(--color-primary-dark);
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+
+        footer { text-align: center; padding: 3rem 2rem 2rem; color: var(--color-text-muted); font-size: 0.9rem; }
+
+        .note-text { color: var(--color-text-muted); font-size: 0.9rem; }
+        .must { color: var(--color-danger); font-weight: 600; }
+
+        /* ステップ説明用 */
+        .step-list { counter-reset: step; list-style: none; padding-left: 0; }
+        .step-list li { counter-increment: step; padding: 0.6rem 0 0.6rem 2.5rem; position: relative; border-left: 2px solid var(--color-border); margin-left: 1rem; }
+        .step-list li::before {
+            content: counter(step); position: absolute; left: -1rem; top: 0.5rem;
+            width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-primary); color: white;
+            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;
+        }
+        .step-list li:last-child { border-left: 2px solid transparent; }
+
+        /* 比較カード（2カラム） */
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .compare .col {
+            border-radius: var(--radius);
+            padding: 1rem 1.2rem;
+        }
+        .compare .col.local { background: #f1f5f9; border-top: 4px solid var(--color-text-muted); }
+        .compare .col.cloud { background: #eff6ff; border-top: 4px solid var(--color-primary); }
+        .compare .col h4 { margin-top: 0; }
+        @media (max-width: 768px) {
+            .compare { grid-template-columns: 1fr; }
+        }
+
+        /* データの流れ図 */
+        .flow-diagram { margin: 1.5rem 0; overflow-x: auto; }
+        .flow-diagram svg { display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; }
+
+        /* タグの分解（構造と属性の色分け） */
+        .tag-anatomy {
+            background: #0f172a; color: #e2e8f0; border-radius: var(--radius);
+            padding: 1.1rem 1.3rem; margin: 1rem 0; overflow-x: auto;
+        }
+        .tag-anatomy code {
+            background: none; padding: 0; font-size: 1.15rem; line-height: 1.6;
+            font-family: "SF Mono", "Consolas", "Menlo", "Courier New", monospace; white-space: nowrap;
+        }
+        .tag-anatomy .t-name    { color: #f87171; font-weight: 700; }
+        .tag-anatomy .t-attr    { color: #fbbf24; font-weight: 700; }
+        .tag-anatomy .t-val     { color: #34d399; }
+        .tag-anatomy .t-content { color: #93c5fd; }
+        .tag-anatomy .legend {
+            margin-top: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem;
+            font-size: 0.82rem; color: #94a3b8;
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+        }
+        .tag-anatomy .legend b { font-weight: 700; }
+        .tag-anatomy .legend .lg-name    { color: #f87171; }
+        .tag-anatomy .legend .lg-attr    { color: #fbbf24; }
+        .tag-anatomy .legend .lg-val     { color: #34d399; }
+        .tag-anatomy .legend .lg-content { color: #93c5fd; }
+
+        /* §4 体験：ソース表示と「表示結果」プレビュー枠 */
+        .code-label { display: inline-block; font-size: 0.85rem; font-weight: 700; color: var(--color-text-muted); margin-top: 1rem; }
+        .demo-result { margin: 0.5rem 0 1rem; }
+        .demo-label { display: block; font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0.3rem; }
+        .demo-frame { display: block; width: 100%; border: 1px solid var(--color-border); border-radius: 8px; background: #fff; }
+
+        /* 折りたたみ小節（クリックで開閉） */
+        details.lesson {
+            border: 1px solid var(--color-border); border-radius: var(--radius);
+            margin: 0.8rem 0; background: #fff; padding: 0 1.2rem;
+        }
+        details.lesson > summary {
+            cursor: pointer; list-style: none; margin: 0 -1.2rem; padding: 0.85rem 1.2rem;
+            font-size: 1.1rem; font-weight: 700; color: var(--color-primary-dark);
+            background: #f8fafc; border-radius: var(--radius);
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        details.lesson > summary::-webkit-details-marker { display: none; }
+        details.lesson > summary::before {
+            content: "▶"; font-size: 0.75rem; color: var(--color-primary);
+            transition: transform 0.15s; flex-shrink: 0;
+        }
+        details.lesson[open] > summary::before { transform: rotate(90deg); }
+        details.lesson > summary:hover { background: #eff6ff; }
+        details.lesson[open] > summary {
+            border-radius: var(--radius) var(--radius) 0 0;
+            border-bottom: 1px solid var(--color-border); margin-bottom: 0.8rem;
+        }
+        details.lesson > :last-child { margin-bottom: 0.8rem; }
+
+        /* アンケート：リンク＋QRコード */
+        .qr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1.2rem 0;
+        }
+        .qr-card {
+            display: flex; align-items: center; gap: 1rem;
+            background: #f8fafc; border: 1px solid var(--color-border);
+            border-radius: var(--radius); padding: 1rem;
+        }
+        .qr-card .qr { width: 110px; height: 110px; flex-shrink: 0; background: #fff; border-radius: 6px; }
+        .qr-card .qr-label { font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .site-header { padding: 1.5rem 1rem; }
+            .site-header h1 { font-size: 1.6rem; }
+            .container { padding: 0 1rem; }
+            section { padding: 1.5rem 1.2rem; margin: 1rem; }
+            .toc ol { columns: 1; }
+            section h2 { font-size: 1.3rem; }
+        }
+
+        @media print {
+            body { background: white; }
+            section { box-shadow: none; page-break-inside: avoid; }
+            .site-header { background: var(--color-primary) !important; }
+        }
+    </style>
+</head>
+
+<body>
+    <a id="top"></a>
+
+    <header class="site-header">
+        <div class="container">
+            <p class="university">名城大学 情報工学部 2026年度</p>
+            <h1>コンピュータリテラシー #13</h1>
+            <p class="subtitle">HTML を書く ／ HTML を GitHub Pages で公開</p>
+            <span class="face-badge">対面講義（E-504 教室）</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="toc">
+            <h2>本資料の内容</h2>
+            <ol>
+                <li><a href="#survey">学修振り返りアンケートのお願い</a></li>
+                <li><a href="#s0">今回の進め方</a></li>
+                <li><a href="#s1">過去の講義資料・出席状況・日程</a></li>
+                <li><a href="#s2">Webページが表示されるまで（データの流れ）</a></li>
+                <li><a href="#s3">HTML の中身と表示のされ方（構造と属性）</a></li>
+                <li><a href="#s4">HTMLの代表的なタグと書き方</a></li>
+                <li><a href="#s5">スタイルの指定</a></li>
+                <li><a href="#s6">実際に作ってみよう</a></li>
+                <li><a href="#s7">HTML を GitHub Pages で公開する</a></li>
+                <li><a href="#s8">まとめ・課題と締切・次回予告</a></li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- ============================================
+         アンケートのお願い（授業のはじめに）
+         ============================================ -->
+    <section id="survey">
+        <h2><span class="section-number">📋</span>学修振り返りアンケートのお願い</h2>
+
+        <p>授業のはじめに、<strong>科目別学修振り返りアンケート</strong>へのご協力をお願いします。
+        下のリンク、または <strong>QRコード</strong>（スマホのカメラで読み取り）から開けます。</p>
+
+        <div class="qr-grid">
+            <div class="qr-card">
+                <img class="qr" src="./res/qr/poster.png" alt="アンケートポスターのQRコード">
+                <div class="qr-label">
+                    <strong>科目別学修振り返りアンケート ポスター</strong><br>
+                    <a href="https://drive.google.com/file/d/1h1RvxKQJPTd65ue5StCKZqNWvk_lxzTp/view?usp=drivesdk" target="_blank">▶ ポスターを開く</a>
+                </div>
+            </div>
+            <div class="qr-card">
+                <img class="qr" src="./res/qr/howto.png" alt="回答方法のQRコード">
+                <div class="qr-label">
+                    <strong>回答方法</strong><br>
+                    <a href="https://drive.google.com/file/d/1aY7K1WTNQcL6SvUP3BmG67Cd6NCVgiG0/view?usp=drive_link" target="_blank">▶ 回答方法を見る</a>
+                </div>
+            </div>
+            <div class="qr-card">
+                <img class="qr" src="./res/qr/answer.png" alt="アンケート回答ページのQRコード">
+                <div class="qr-label">
+                    <strong>アンケート回答はこちらから</strong><br>
+                    <a href="https://slbsso.meijo-u.ac.jp/opensso/XUI/#login/" target="_blank">▶ 回答ページを開く</a>
+                </div>
+            </div>
+        </div>
+
+        <h3>回答の流れ</h3>
+        <ol class="step-list">
+            <li><strong>STEP1（約3分）</strong>　アンケートに回答する。</li>
+            <li><strong>STEP2（約5分）</strong>　周りの人と、アンケートの回答内容について意見交換する。</li>
+            <li><strong>STEP3（約2分）</strong>　意見交換の結果、修正したい場合は修正できます。</li>
+        </ol>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <!-- ============================================
+         セクション0: 今回の進め方
+         ============================================ -->
+    <section id="s0">
+        <h2><span class="section-number">0</span>今回の進め方</h2>
+
+        <div class="callout">
+            <strong class="label">📍 対面授業:</strong>
+            7月2日(木) E-504 教室。Bクラス＝3限／Aクラス＝4限。出席は教室の IC カードで登録。
+        </div>
+
+        <ol class="step-list">
+            <li>Webページが表示されるしくみ（§2）／ HTML の中身と表示（§3）</li>
+            <li>HTML のタグと書き方（§4）／ スタイルの指定（§5）／ 実際に作る（§6）</li>
+            <li>書いた HTML を GitHub Pages で公開（§7）</li>
+        </ol>
+
+        <div class="callout tip">
+            <strong class="label">💡 全体の流れ:</strong>
+            CL-11（GitHub の準備）→ CL-12（Markdown を公開）→ <strong>CL-13（HTML を公開）</strong> → CL-14（履歴管理・仕上げ）。
+            前回 Markdown でやった公開を、今回は HTML で行います。
+        </div>
+
+        <div class="callout note">
+            <strong class="label">🔗 GitHub / GitHub Pages の復習（同梱）:</strong>
+            今回の「公開」の前に、前回までの資料をこのフォルダ内で見直せます。
+            <a href="CL11/index.html#s6">▶ CL-11（GitHub の登録・準備）</a> ／
+            <a href="CL12/index.html#s6">▶ CL-12（GitHub Pages での公開）</a>
+            <br><span class="note-text">※ それぞれ同梱フォルダ <code class="path">CL11/</code> ・ <code class="path">CL12/</code> 内の資料が開きます。</span>
+        </div>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <!-- ============================================
+         セクション1: 過去の講義資料・出席状況・日程
+         ============================================ -->
+    <section id="s1">
+        <h2><span class="section-number">1</span>過去の講義資料・出席状況・日程</h2>
+
+        <div class="callout tip">
+            <strong class="label">📥 過去の講義資料（Drive）:</strong>
+            <a href="https://drive.google.com/drive/folders/1S9MbI1lETHGyb8ePA5CnirpT3lmMbBu_?usp=sharing" target="_blank">CL-01</a> /
+            <a href="https://drive.google.com/drive/folders/1bX94jXXXwJq93Ub3Xjqw_wSpoN3aNKE9?usp=sharing" target="_blank">CL-02</a> /
+            <a href="https://drive.google.com/drive/folders/1iotZl0YnTtgavws_ike1IJQIsjkULo2Y?usp=sharing" target="_blank">CL-03</a> /
+            <a href="https://drive.google.com/drive/folders/1B8zHjGobr4v0Ak9jGBMvFm_defoFpKdH?usp=sharing" target="_blank">CL-04</a> /
+            <a href="https://drive.google.com/drive/folders/1hgHA1ExxWg6w9T0puRkgU1_pN7icXhkU?usp=sharing" target="_blank">CL-05</a> /
+            <a href="https://drive.google.com/drive/folders/1Wg4ugAtHV-AJHwIiyTUpc81pcgSq_599?usp=sharing" target="_blank">CL-06</a> /
+            <a href="https://drive.google.com/drive/folders/1Z4MDtFuJiCzR_Xd2TIrkdJRIV5nrGY6c?usp=sharing" target="_blank">CL-07</a> /
+            <a href="https://drive.google.com/drive/folders/1ROOGdf_DUW9Rpb1zkzogYmRYVdeadykV?usp=sharing" target="_blank">CL-08</a> /
+            <a href="https://drive.google.com/drive/folders/1fnmRN4DZVzyNdWoi1hyWhvK-NubNA_5x?usp=sharing" target="_blank">CL-09</a> /
+            <a href="https://drive.google.com/drive/folders/1HCIqroj3zPQMYHO6Jum2N924P2v_yzh5?usp=sharing" target="_blank">CL-10</a> /
+            <a href="https://drive.google.com/drive/folders/1Akb9YVlbaJ_2CvuCvNO0bwBrQEKSxHC1?usp=sharing" target="_blank">CL-11</a> /
+            <a href="https://drive.google.com/drive/folders/1z6ju9Od5gYPdygXQU3MCawKdWUI__jDg?usp=sharing" target="_blank">CL-12</a>
+            <br><span class="note-text">⚠ <strong>名城大学の Google アカウント</strong>でログインが必要（個人アカウント不可）。</span>
+        </div>
+
+        <h3>過去回の出席状況</h3>
+        <ul>
+            <li>Aクラス：<a href="https://docs.google.com/spreadsheets/d/1ZYIUi_9XJJvehcquSxdIVN6WYvVojUsO4z9je9m8sfA/edit?usp=sharing" target="_blank">出席状況シート</a> ／ Bクラス：<a href="https://docs.google.com/spreadsheets/d/1Af_DTBHwGQTAtwZ0Vj2SqfM4Mogq3szZDfV2I0lHmHI/edit?usp=sharing" target="_blank">出席状況シート</a></li>
+        </ul>
+
+        <h3>授業日程</h3>
+        <div class="schedule-grid">
+            <div class="item"><strong>第1回</strong>4/16(木)</div>
+            <div class="item"><strong>第2回</strong>4/23(木)</div>
+            <div class="item remote"><strong>第3回 遠隔</strong>4/24〜4/29</div>
+            <div class="item"><strong>第4回</strong>4/30(木)</div>
+            <div class="item"><strong>第5回</strong>5/7(木)</div>
+            <div class="item"><strong>第6回</strong>5/14(木)</div>
+            <div class="item"><strong>第7回</strong>5/21(木)</div>
+            <div class="item"><strong>第8回</strong>5/28(木)</div>
+            <div class="item"><strong>第9回</strong>6/4(木)</div>
+            <div class="item remote"><strong>第10回 遠隔</strong>6/5〜6/17</div>
+            <div class="item"><strong>第11回</strong>6/18(木)</div>
+            <div class="item"><strong>第12回</strong>6/25(木)</div>
+            <div class="item current"><strong>第13回 ← 今回</strong>7/2(木)</div>
+            <div class="item"><strong>第14回</strong>7/9(木)</div>
+            <div class="item"><strong>第15回</strong>7/16(木)</div>
+        </div>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <!-- ============================================
+         セクション2: Webページが表示されるまで（データの流れ）
+         ============================================ -->
+    <section id="s2">
+        <h2><span class="section-number">2</span>Webページが表示されるまで（データの流れ）</h2>
+
+        <p>みなさんがスマホやPCで Webページを見るとき、その画面は <strong>どこかから送られてきたデータ</strong>を、
+        ブラウザが読んで組み立てて表示したものです。まずは「ページが表示されるまでに、データがどう流れるか」を見てみましょう。</p>
+
+        <div class="flow-diagram">
+            <svg viewBox="0 0 760 360" role="img" aria-label="左の Webサーバーの中に HTMLファイルがあり、右にある複数の Webブラウザがサーバーへリクエストを送り、サーバーが HTMLなどのデータをレスポンスとして返し、ブラウザの中でレンダリングして画面に表示するまでの流れ図">
+                <defs>
+                    <marker id="ah-blue"  markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker>
+                    <marker id="ah-green" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#10b981"/></marker>
+                    <marker id="ah-amber" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#f59e0b"/></marker>
+                </defs>
+
+                <!-- 左：Webサーバー（中に HTMLファイル） -->
+                <rect x="30" y="85" width="205" height="180" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+                <text x="132" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#334155">🖥 Webサーバー</text>
+                <text x="132" y="138" text-anchor="middle" font-size="11" fill="#64748b">ページの置き場所</text>
+                <!-- HTMLファイル（重ねて複数ページを表現） -->
+                <rect x="86" y="172" width="104" height="68" rx="8" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1.5"/>
+                <rect x="74" y="162" width="104" height="68" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+                <text x="126" y="194" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">📄 index.html</text>
+                <text x="126" y="214" text-anchor="middle" font-size="10" fill="#64748b">HTMLファイル</text>
+
+                <!-- 右：Webブラウザ（複数台あることを重ねて表現） -->
+                <rect x="524" y="48" width="220" height="232" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+                <rect x="512" y="60" width="220" height="232" rx="12" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.5"/>
+                <!-- 手前のブラウザ（中でレンダリング→表示が起こる） -->
+                <rect x="500" y="72" width="220" height="232" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+                <text x="515" y="100" font-size="16" font-weight="700" fill="#1e40af">💻 Webブラウザ</text>
+                <text x="515" y="119" font-size="11" fill="#64748b">ページを見る人のソフト</text>
+
+                <!-- ③ レンダリング（ブラウザの中） -->
+                <rect x="518" y="135" width="184" height="72" rx="9" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+                <text x="610" y="163" text-anchor="middle" font-size="15" font-weight="700" fill="#b45309">③ レンダリング</text>
+                <text x="610" y="186" text-anchor="middle" font-size="11" fill="#92400e">HTMLを解釈して組み立てる</text>
+
+                <line x1="610" y1="207" x2="610" y2="233" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#ah-amber)"/>
+
+                <!-- 🖼 画面に表示（ブラウザの中） -->
+                <rect x="518" y="235" width="184" height="58" rx="9" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+                <text x="610" y="262" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">🖼 画面に表示</text>
+                <text x="610" y="282" text-anchor="middle" font-size="10.5" fill="#065f46">ページが見える</text>
+
+                <!-- ① リクエスト（ブラウザ→サーバー：右から左） -->
+                <!-- URL（＝サーバー上のファイルの住所）を指定して要求することを示す -->
+                <rect x="240" y="88" width="254" height="24" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+                <text x="367" y="104" text-anchor="middle" font-size="10.5" fill="#1d4ed8" font-family="'SF Mono', Consolas, Menlo, monospace">https://www.meijo-u.ac.jp/index.html</text>
+                <text x="367" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">①「この URL のファイルをください」</text>
+                <text x="367" y="149" text-anchor="middle" font-size="11" fill="#64748b">リクエスト（要求）</text>
+                <line x1="500" y1="162" x2="235" y2="162" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ah-blue)"/>
+
+                <!-- ② レスポンス（サーバー→ブラウザ：左から右） -->
+                <line x1="235" y1="195" x2="500" y2="195" stroke="#10b981" stroke-width="2.5" marker-end="url(#ah-green)"/>
+                <text x="367" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">② HTMLなどのデータ</text>
+                <text x="367" y="232" text-anchor="middle" font-size="11" fill="#64748b">レスポンス（応答）</text>
+
+                <!-- 補足：ブラウザは世界中にたくさん -->
+                <text x="610" y="330" text-anchor="middle" font-size="11" fill="#475569">💻 ブラウザは世界中にたくさんある</text>
+            </svg>
+        </div>
+
+        <ol class="step-list">
+            <li><strong>① リクエスト（要求）</strong>：ブラウザのアドレス欄に URL を入れたり、リンクを押したりすると、ブラウザが Webサーバーに「<strong>この URL のファイル</strong>をください」とお願いする（URL ＝ サーバー上のファイルの住所）。</li>
+            <li><strong>② レスポンス（応答）</strong>：Webサーバーは、そのページを作るための <strong>HTML・画像・スタイル</strong>などのデータを、ブラウザに送り返す。</li>
+            <li><strong>③ レンダリング（描画）</strong>：ブラウザは受け取った HTML を解釈し、文字・画像・配置を組み立てて画面に表示する。この「解釈して組み立てる」処理を <strong>レンダリング</strong>と呼ぶ。</li>
+        </ol>
+
+        <div class="callout">
+            <strong class="label">🔗 「ページをください」＝ URL でファイルを指定すること:</strong>
+            URL（<code class="inline">https://…</code> で始まる文字列）は、サーバー上にあるファイルの「住所」です。
+            ブラウザは「<strong>この URL のファイルをください</strong>」とサーバーに要求します。
+            たとえば末尾が <code class="inline">/index.html</code> なら、サーバーの中の <code class="inline">index.html</code> というファイルを要求している、ということ。
+            URL の末尾を省略（例：<code class="inline">https://www.meijo-u.ac.jp/</code>）したときは、多くのサイトで <code class="inline">index.html</code> が要求されます。
+            <span class="note-text">（だから、公開するページのファイル名は <code class="inline">index.html</code> にするのが基本です。）</span>
+        </div>
+
+        <div class="callout">
+            <strong class="label">🔁 ページを移動するたびに繰り返す:</strong>
+            別のページに移動するたびに、①→②→③ がもう一度行われます。Web を見るとは、この「要求して・もらって・表示する」のくり返しです。
+        </div>
+
+        <div class="callout tip">
+            <strong class="label">📦 自分のPCのファイルでも同じ:</strong>
+            自分のPCにある <code class="inline">index.html</code> をダブルクリックして開くときは、サーバーとの通信は無く、PC内のファイルをブラウザが直接レンダリングします（③ だけが起こる）。§6 で体験します。
+        </div>
+
+        <div class="callout note">
+            <strong class="label">➡ 次は「データの中身」へ:</strong>
+            では、② で送られてくる <strong>データそのもの</strong>は、どんな形をしているのでしょうか。その中心が、次のセクションの <strong>HTML</strong> です。
+        </div>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <!-- ============================================
+         セクション3: HTML の中身と表示のされ方（構造と属性）
+         ============================================ -->
+    <section id="s3">
+        <h2><span class="section-number">3</span>HTML の中身と表示のされ方（構造と属性）</h2>
+
+        <p>② でサーバーから送られてくるデータの中心が <strong>HTML</strong> です。
+        前回の Markdown が「記号で構造を書く」ものだったのに対し、HTML は <strong>もっと細かく構造を指定できる</strong>書き方です。</p>
+
+        <h3>3-1. タグで「意味」をつける（構造）</h3>
+        <ul>
+            <li>HTML は、文章に「ここは見出し」「ここは箇条書き」と <strong>意味の印（タグ）</strong> をつけたもの。</li>
+            <li>タグは <code class="inline">&lt;タグ名&gt;内容&lt;/タグ名&gt;</code> の形。前が <strong>開始タグ</strong>、後ろが <strong>終了タグ</strong>。</li>
+            <li>タグは <strong>入れ子</strong>にできる（タグの中にタグ）。この入れ子の積み重ねが、ページの <strong>構造</strong>になる。</li>
+            <li>ブラウザは、この構造を読み取って（§2 の ③ レンダリング）画面に表示する。</li>
+        </ul>
+
+        <h3>3-2. ページの骨組み（いちばん基本の形）</h3>
+        <span class="code-label">▼ HTML</span>
+        <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;はじめてのページ&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;こんにちは&lt;/h1&gt;
+  &lt;p&gt;これは本文です。&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+        <ul>
+            <li><code class="inline">&lt;head&gt;</code>：ページの設定（文字コード <code class="inline">charset</code>、タブに出る <code class="inline">title</code> など）。画面には出ない。</li>
+            <li><code class="inline">&lt;body&gt;</code>：画面に表示される中身。</li>
+            <li>全体が <code class="inline">&lt;html&gt;</code> の中に <code class="inline">&lt;head&gt;</code> と <code class="inline">&lt;body&gt;</code> が入る、という <strong>入れ子の構造</strong>になっている。</li>
+        </ul>
+
+        <h3>3-3. 属性で「表示のされ方・動き」が変わる</h3>
+        <p>タグには、追加の情報を <strong>属性</strong>として付けられます。属性は <strong>開始タグの中</strong>に
+        <code class="inline">属性名="値"</code> の形で書きます。同じタグでも、付ける属性によって <strong>表示のされ方や挙動が変わります</strong>。</p>
+
+        <div class="tag-anatomy">
+            <code>&lt;<span class="t-name">a</span> <span class="t-attr">href</span>=<span class="t-val">"https://www.meijo-u.ac.jp/"</span>&gt;<span class="t-content">名城大学</span>&lt;/<span class="t-name">a</span>&gt;</code>
+            <div class="legend">
+                <span><b class="lg-name">タグ名</b>（a＝リンク）</span>
+                <span><b class="lg-attr">属性名</b>（href）</span>
+                <span><b class="lg-val">値</b>（リンク先のURL）</span>
+                <span><b class="lg-content">内容</b>（画面に出る文字）</span>
+            </div>
+        </div>
+
+        <p>属性の例（表示結果とセットで見るのは次の §4）：</p>
+        <table>
+            <tr><th>タグと属性</th><th>属性が変えること（表示・挙動）</th></tr>
+            <tr><td><code class="inline">&lt;a <strong>href</strong>="..."&gt;</code></td><td>リンク先の URL。クリックすると、そのページへ <strong>移動する</strong>（挙動）。</td></tr>
+            <tr><td><code class="inline">&lt;img <strong>src</strong>="..." <strong>alt</strong>="..."&gt;</code></td><td><code class="inline">src</code>＝表示する画像ファイル。<code class="inline">alt</code>＝画像が出ないときの代わりの文字。</td></tr>
+            <tr><td><code class="inline">&lt;input <strong>type</strong>="text"&gt;</code></td><td><code class="inline">type</code> で入力欄の種類が変わる。<code class="inline">text</code> なら普通の文字入力、<code class="inline">password</code> なら伏せ字になる（表示・挙動）。</td></tr>
+            <tr><td><code class="inline">&lt;タグ <strong>style</strong>="..."&gt;</code></td><td>どのタグにも付けられる特別な属性。色・大きさ・余白などの <strong>見た目</strong>を直接指定する（くわしくは §5）。</td></tr>
+        </table>
+
+        <div class="callout note">
+            <strong class="label">🧩 同じタグでも属性で別物に:</strong>
+            たとえば <code class="inline">&lt;input&gt;</code> は、<code class="inline">type</code> 属性ひとつで、文字入力欄・パスワード欄・チェックボックスなどに変わります。属性は「タグの細かい指定スイッチ」だと考えるとわかりやすいです。
+        </div>
+
+        <div class="callout tip">
+            <strong class="label">📖 公式の仕様（参考）:</strong>
+            <a href="https://html.spec.whatwg.org/multipage/" target="_blank">HTML Living Standard</a> ／
+            <a href="https://momdo.github.io/html/" target="_blank">日本語訳</a>（今は眺めるだけでOK）
+        </div>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <!-- ============================================
+         セクション4: HTMLの代表的なタグと書き方
+         ============================================ -->
+    <section id="s4" class="hands-on">
+        <h2><span class="section-number">4</span>HTMLの代表的なタグと書き方</h2>
+
+        <p>代表的なタグを、コードと <strong>表示結果</strong> をセットで見ていきます。
+        <code class="inline">&lt;body&gt;</code> の中に書く部分です。</p>
+
+        <div class="callout tip">
+            <strong class="label">🧪 実験してみよう:</strong>
+            各例の <strong>「▼ HTML」のソース</strong>と<strong>「表示結果」</strong>は、どちらも同梱の <code class="path">res/html_samples/</code> フォルダにある
+            <strong>同じ HTML ファイル</strong>を読み込んで表示しています。
+            これらのファイルをエディタで開いて書き換え → 保存 → ブラウザで <code class="inline">F5</code>（再読み込み）すると、
+            ソースと表示の両方がどう変わるか実験できます。
+        </div>
+
+        <p class="note-text">▶ 各項目は <strong>クリックすると開きます</strong>。気になるものから見ていきましょう（全部いっぺんに覚えなくて大丈夫です）。</p>
+
+        <details class="lesson"><summary>4-1. 見出しと本文</summary>
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/01_見出しと本文.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/01_見出しと本文.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;見出しと本文&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;大見出し&lt;/h1&gt;
+&lt;h2&gt;中見出し&lt;/h2&gt;
+&lt;p&gt;これは段落（本文）です。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/01_見出しと本文.html" style="height:210px;" onload="try{this.style.height=(this.contentWindow.document.body.scrollHeight+36)+'px'}catch(e){}"></iframe>
+        </div>
+
+        </details>
+
+        <details class="lesson"><summary>4-2. 箇条書き・番号付きリスト</summary>
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/02_リスト.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/02_リスト.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;箇条書き・番号付きリスト&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;りんご&lt;/li&gt;
+  &lt;li&gt;みかん&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;準備&lt;/li&gt;
+  &lt;li&gt;実行&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/02_リスト.html" style="height:190px;" onload="try{this.style.height=(this.contentWindow.document.body.scrollHeight+36)+'px'}catch(e){}"></iframe>
+        </div>
+
+        </details>
+
+        <details class="lesson"><summary>4-3. 表</summary>
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/03_表.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/03_表.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;表&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table border="1"&gt;
+  &lt;tr&gt;&lt;th&gt;名前&lt;/th&gt;&lt;th&gt;点数&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;山田&lt;/td&gt;&lt;td&gt;80&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/03_表.html" style="height:130px;" onload="try{this.style.height=(this.contentWindow.document.body.scrollHeight+36)+'px'}catch(e){}"></iframe>
+        </div>
+
+        </details>
+
+        <details class="lesson"><summary>4-4. リンク</summary>
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/04_リンク.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/04_リンク.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;リンク&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;a href="https://www.meijo-u.ac.jp/"&gt;名城大学&lt;/a&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/04_リンク.html" style="height:80px;" onload="try{this.style.height=(this.contentWindow.document.body.scrollHeight+36)+'px'}catch(e){}"></iframe>
+        </div>
+        <p class="note-text">※ リンクは、ブラウザ標準では青い下線つきの文字で表示されます。クリックすると <code class="inline">href</code> に書いた URL へ移動します。</p>
+
+        </details>
+
+        <details class="lesson"><summary>4-5. 画像</summary>
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/05_画像.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/05_画像.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;画像&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;img src="./ipanema.jpg" alt="イパネマ海岸の写真"&gt;&lt;br&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/05_画像.html" style="height:430px;" onload="try{var d=this.contentWindow.document,fit=function(){this.style.height=(d.body.scrollHeight+36)+'px'}.bind(this);fit();var im=d.images;for(var i=0;i&lt;im.length;i++){im[i].complete||im[i].addEventListener('load',fit)}}catch(e){}"></iframe>
+        </div>
+
+        </details>
+
+        <details class="lesson"><summary>4-6. 入力欄・ボタン</summary>
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/06_ボタン.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/06_ボタン.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;入力欄・ボタン&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p&gt;趣味は何ですか？ &lt;input type="text" size="20"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;button&gt;送信ボタン&lt;/button&gt;&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/06_ボタン.html" style="height:160px;" onload="try{this.style.height=(this.contentWindow.document.body.scrollHeight+36)+'px'}catch(e){}"></iframe>
+        </div>
+        <p class="note-text">※ いまは押しても何も起きません。ボタンに「動き」をつけるには JavaScript が必要です（この授業では扱いません）。</p>
+
+        </details>
+
+        <details class="lesson"><summary>4-7. 動画</summary>
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/07_動画.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/07_動画.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;動画&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;video src="./bbb_clip0.mp4" controls width="320" height="180"&gt;&lt;/video&gt;&lt;br&gt;
+(c) copyright 2008, Blender Foundation / www.bigbuckbunny.org
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/07_動画.html" style="height:260px;" onload="try{this.style.height=(this.contentWindow.document.body.scrollHeight+36)+'px'}catch(e){}"></iframe>
+        </div>
+        <p class="note-text">※ <code class="inline">controls</code> 属性をつけると、再生・一時停止・音量などの操作ボタンが表示されます（§3-3 の「属性で挙動が変わる」例）。動画素材：Big Buck Bunny（© 2008 Blender Foundation / <a href="https://www.bigbuckbunny.org/" target="_blank">bigbuckbunny.org</a>）。</p>
+
+        </details>
+
+        <details class="lesson"><summary>4-8. 特殊な文字の表示（エスケープ）</summary>
+        <p>HTML では、<code class="inline">&lt;</code>・<code class="inline">&gt;</code>・<code class="inline">&amp;</code> の3文字は <strong>特別な意味を持つ記号</strong>です。
+        <code class="inline">&lt;</code> と <code class="inline">&gt;</code> は <strong>タグの始まり・終わり</strong>を表し、<code class="inline">&amp;</code> は次に説明する <strong>特殊文字の書き始め</strong>を表します。</p>
+
+        <div class="callout warning">
+            <strong class="label">⚠ そのまま書くとどうなる？:</strong>
+            たとえば本文に <code class="inline">&lt;b&gt;</code> とそのまま打つと、ブラウザはそれを <strong>「太字タグ」だと解釈</strong>してしまい、文字として画面に出せません。
+            <code class="inline">5 &lt; 10</code> の <code class="inline">&lt;</code> も「ここからタグが始まる」と勘違いされ、表示が崩れます。
+        </div>
+
+        <p>そこで、これらの文字を <strong>文字として表示したい</strong>ときは、次のような <strong>別の書き方（エスケープ／文字実体参照）</strong>に置きかえます。</p>
+        <table>
+            <tr><th>表示したい文字</th><th>HTML での書き方</th><th>読み</th></tr>
+            <tr><td><code class="inline">&lt;</code>（小なり）</td><td><code class="inline">&amp;lt;</code></td><td>less than</td></tr>
+            <tr><td><code class="inline">&gt;</code>（大なり）</td><td><code class="inline">&amp;gt;</code></td><td>greater than</td></tr>
+            <tr><td><code class="inline">&amp;</code>（アンパサンド）</td><td><code class="inline">&amp;amp;</code></td><td>ampersand</td></tr>
+        </table>
+        <p class="note-text">いずれも <code class="inline">&amp;</code> で始まり <code class="inline">;</code> で終わる形です。ブラウザはこれを読んで、対応する記号を画面に表示します。</p>
+
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/08_エスケープ文字.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/08_エスケープ文字.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;特殊な文字（エスケープ）&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p&gt;「&amp;lt;br&amp;gt;」は改行のためのタグです。&lt;/p&gt;
+&lt;p&gt;AT&amp;amp;T のように、&amp;amp; は「&amp;amp;amp;」と書きます。&lt;/p&gt;
+&lt;p&gt;5 &amp;lt; 10 は「5 は 10 より小さい」という意味です。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/08_エスケープ文字.html" style="height:160px;" onload="try{this.style.height=(this.contentWindow.document.body.scrollHeight+36)+'px'}catch(e){}"></iframe>
+        </div>
+        <div class="callout tip">
+            <strong class="label">💡 なぜ必要？:</strong>
+            HTML は「タグ（<code class="inline">&lt; &gt;</code>）で構造を組み立てる」しくみなので、構造に使う記号と、文章として見せたい記号を <strong>区別する必要がある</strong>からです。だから「文字として見せたい記号」は、専用の書き方に置きかえます。
+        </div>
+        </details>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <!-- ============================================
+         セクション5: スタイルの指定
+         ============================================ -->
+    <section id="s5" class="hands-on">
+        <h2><span class="section-number">5</span>スタイルの指定</h2>
+
+        <p>タグに <code class="inline">style</code> 属性を付けると、<strong>色・大きさ・位置・重なり</strong>などの「見た目」を変えられます。</p>
+        <p class="note-text">▶ 各項目は <strong>クリックすると開きます</strong>。</p>
+
+        <details class="lesson"><summary>5-1. style 属性で見た目を変える</summary>
+        <p><code class="inline">style</code> は、<strong>どのタグにも付けられる</strong>特別な属性で、色・大きさ・余白・枠線などの <strong>見た目</strong>を指定します。
+        値は <code class="inline">プロパティ: 値;</code> の形で書き、<strong>セミコロン <code class="inline">;</code> で区切って複数</strong>並べられます。
+        ここでは <code class="inline">&lt;button&gt;</code> と <code class="inline">&lt;div&gt;</code>（範囲をまとめるための箱）で、いくつかの例を見てみましょう。</p>
+
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/09_style.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/09_style.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;style 属性で見た目を変える&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h3&gt;ボタンの見た目を style で変える&lt;/h3&gt;
+&lt;button&gt;ふつうのボタン&lt;/button&gt;
+&lt;button style="color: white; background-color: #2563eb;"&gt;青いボタン&lt;/button&gt;
+&lt;button style="color: white; background-color: #dc2626; border-radius: 9999px;"&gt;赤い丸ボタン&lt;/button&gt;
+&lt;button style="font-size: 20px; padding: 10px 24px;"&gt;大きいボタン&lt;/button&gt;
+
+&lt;h3&gt;div の見た目を style で変える&lt;/h3&gt;
+&lt;div style="background-color: #fef3c7;"&gt;背景に色をつけた div&lt;/div&gt;
+&lt;div style="color: #2563eb; font-size: 24px; font-weight: bold;"&gt;文字を大きく・青く・太字に&lt;/div&gt;
+&lt;div style="border: 2px solid #10b981; padding: 12px;"&gt;枠線と余白をつけた div&lt;/div&gt;
+&lt;div style="background-color: #1e293b; color: white; padding: 16px; text-align: center;"&gt;背景色・文字色・中央ぞろえ&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/09_style.html" style="height:360px;" onload="try{this.style.height=(this.contentWindow.document.body.scrollHeight+36)+'px'}catch(e){}"></iframe>
+        </div>
+
+        <table>
+            <tr><th>style の書き方</th><th>変わる見た目</th></tr>
+            <tr><td><code class="inline">color: white;</code></td><td>文字の色</td></tr>
+            <tr><td><code class="inline">background-color: #2563eb;</code></td><td>背景の色</td></tr>
+            <tr><td><code class="inline">font-size: 20px;</code></td><td>文字の大きさ</td></tr>
+            <tr><td><code class="inline">font-weight: bold;</code></td><td>文字の太さ（太字）</td></tr>
+            <tr><td><code class="inline">padding: 12px;</code></td><td>内側の余白</td></tr>
+            <tr><td><code class="inline">border: 2px solid #10b981;</code></td><td>枠線（太さ・種類・色）</td></tr>
+            <tr><td><code class="inline">border-radius: 9999px;</code></td><td>角の丸み</td></tr>
+            <tr><td><code class="inline">text-align: center;</code></td><td>文字の位置（中央ぞろえ）</td></tr>
+        </table>
+        <div class="callout tip">
+            <strong class="label">💡 実験のヒント:</strong>
+            色（<code class="inline">#2563eb</code> など）や数値（<code class="inline">20px</code> など）を書きかえて保存 →
+            ブラウザで <code class="inline">F5</code> すると、見た目がどう変わるか確かめられます。
+            <span class="note-text">（このような「見た目の指定」をまとめて書くしくみが CSS ですが、この授業では <code class="inline">style</code> 属性で少し触れるだけにします。）</span>
+        </div>
+
+        </details>
+
+        <details class="lesson"><summary>5-2. 座標で位置を指定する</summary>
+        <p>ふつう、要素は書いた順に <strong>上から下へ</strong>並びます。これを <strong>座標（位置）で自由に置く</strong>こともできます。</p>
+        <ul>
+            <li>置きたい要素に <code class="inline">position: absolute;</code> を付ける。</li>
+            <li><code class="inline">left</code>（左から）・<code class="inline">top</code>（上から）の距離で位置を指定する（例：<code class="inline">left: 20px; top: 80px;</code>）。</li>
+            <li>位置の基準にしたい <strong>外側の箱（<code class="inline">&lt;div&gt;</code>）</strong>には <code class="inline">position: relative;</code> を付ける。その箱の <strong>左上が 0 の基準</strong>になる。</li>
+        </ul>
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/10_座標指定.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/10_座標指定.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;座標で位置を指定する&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div style="position: relative; height: 140px; border: 1px solid #cbd5e1; background: #f8fafc;"&gt;
+  &lt;div style="position: absolute; left: 20px; top: 20px; background: #fef3c7; padding: 6px;"&gt;左から 20px・上から 20px&lt;/div&gt;
+  &lt;div style="position: absolute; left: 180px; top: 80px; background: #dbeafe; padding: 6px;"&gt;左から 180px・上から 80px&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/10_座標指定.html" style="height:200px;" onload="try{this.style.height=(this.contentWindow.document.body.scrollHeight+36)+'px'}catch(e){}"></iframe>
+        </div>
+
+        </details>
+
+        <div class="callout tip">
+            <strong class="label">💡 重なったときの前後（どちらが上？）:</strong>
+            座標で要素を重ねると、前後（重なり）ができます。むずかしい指定をしなくても、
+            <strong>HTML で後から（下の方に）書いた要素が、前面（上）に表示されます</strong>。
+            前後を変えたいときは、<strong>書く順番を入れかえます</strong>。
+        </div>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <!-- ============================================
+         セクション6: 実際に作ってみよう
+         ============================================ -->
+    <section id="s6" class="hands-on">
+        <h2><span class="section-number">6</span>実際に作ってみよう</h2>
+
+        <details class="lesson"><summary>6-1. 自分のページを作る</summary>
+        <ol class="step-list">
+            <li>デスクトップに、<strong>自分の学籍番号</strong>の名前でフォルダを作る。</li>
+            <li>エディタ（メモ帳・サクラエディタ・VS Code など）を開き、§3 の「骨組み」＋上のタグを貼り付けて書いてみる。</li>
+            <li><strong>文字コード UTF-8</strong> で、そのフォルダに <code class="inline">index.html</code> という名前で保存する。</li>
+            <li>保存した <code class="inline">index.html</code> を <strong>ダブルクリック</strong>してブラウザで開く → 自分の書いた内容が表示される。</li>
+            <li>書き換えて保存 → ブラウザで <code class="inline">F5</code>（再読み込み）→ 変化を確認。</li>
+        </ol>
+
+        </details>
+
+        <details class="lesson"><summary>6-2. 同じ位置に画像を重ねて表示する</summary>
+        <p><strong>5-2 の座標指定</strong>を使うと、<strong>2枚の画像を同じ位置に重ねて</strong>表示できます。
+        外側の箱を <code class="inline">position: relative;</code> にし、画像を <code class="inline">position: absolute; left: 0; top: 0;</code> でそろえます。<strong>後から書いた画像が上</strong>に重なります。</p>
+        <span class="code-label">▼ HTML（<code class="inline">res/html_samples/12_画像の重ね合わせ.html</code> の中身）</span>
+        <pre class="src-view" data-src="./res/html_samples/12_画像の重ね合わせ.html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;同じ位置に画像を重ねる&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div style="position: relative; width: 480px; height: 374px;"&gt;
+  &lt;img src="./ipanema.jpg" style="position: absolute; left: 0; top: 0;"&gt;
+  &lt;img src="./neko.png" style="position: absolute; left: 0; top: 0;"&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="demo-result">
+            <span class="demo-label">表示結果（ブラウザ素の表示）</span>
+            <iframe class="demo-frame" title="表示結果" src="./res/html_samples/12_画像の重ね合わせ.html" style="height:420px;" onload="try{var d=this.contentWindow.document,fit=function(){this.style.height=(d.body.scrollHeight+36)+'px'}.bind(this);fit();var im=d.images;for(var i=0;i&lt;im.length;i++){im[i].complete||im[i].addEventListener('load',fit)}}catch(e){}"></iframe>
+        </div>
+        <ol class="step-list">
+            <li><code class="inline">res/html_samples</code> の <code class="inline">ipanema.jpg</code> と <code class="inline">neko.png</code> を、自分のフォルダにコピーする。</li>
+            <li>上のコードを <code class="inline">index.html</code> に書いて保存 → ブラウザで開くと、2枚が重なって表示される。</li>
+            <li>2枚の <code class="inline">&lt;img&gt;</code> の <strong>書く順番</strong>を入れかえて保存 → <code class="inline">F5</code> → どちらが前面になるか確かめる。</li>
+            <li><code class="inline">left</code> / <code class="inline">top</code> の数値を変えて、重なり方を調整してみる。</li>
+        </ol>
+        <p class="note-text">※ 前面の画像が、うしろの写真の重なった部分を <strong>おおいかくします</strong>。<strong>書く順番</strong>を入れかえると、どちらが前面になるか変わります。なお、透明な部分をもつ画像（PNG）を重ねると、うしろが透けて自然に合成できます。</p>
+        </details>
+
+        <details class="lesson" open><summary>6-3. チャレンジ：見本のようなページを作ろう</summary>
+        <p>これまでのタグとスタイルを使って、下の <strong>見本と同じようなページ</strong> を作ってみましょう。</p>
+        <figure>
+            <img src="./res/webpage_sample1.png" alt="見本：花畑と家の写真の上に、左上のメッセージと、花畑を飛ぶ蝶を重ねたWebページ">
+            <figcaption>見本（<code class="inline">res/webpage_sample1.png</code>）</figcaption>
+        </figure>
+
+        <div class="callout tip">
+            <strong class="label">🖼 素材のありか:</strong>
+            この <code class="inline">index.html</code> と <strong>同じフォルダの中</strong>にある <code class="path">素材/</code> フォルダに、背景や蝶などの画像が入っています。
+            必要な画像を <strong>自分のフォルダにコピー</strong>して使いましょう。
+        </div>
+
+        <p><strong>使う技（これまでの内容）:</strong></p>
+        <ul>
+            <li>背景になる画像を <code class="inline">&lt;img&gt;</code> で置く（§4-5）。</li>
+            <li>全体を <code class="inline">position: relative;</code> の箱（<code class="inline">&lt;div&gt;</code>）でくくる。</li>
+            <li>メッセージ（文字）を <code class="inline">position: absolute;</code> で左上に重ねる（§5-2）。</li>
+            <li>蝶などの画像を <code class="inline">position: absolute;</code> ＋ <code class="inline">left</code>/<code class="inline">top</code> で好きな場所に置く（§5-2・§6-2。後から書いたものが上）。</li>
+        </ul>
+        <p class="note-text">※ まったく同じでなくて大丈夫です。文章・色・画像の位置は自由に変えて、自分のページにしてみましょう。</p>
+        </details>
+
+        <div class="callout note">
+            <strong class="label">🔮 次回の予告:</strong>
+            次回は、<strong>CSS</strong> と <strong>かんたんな JavaScript</strong> を使って、
+            <strong>ユーザーの操作（マウスを乗せる・クリックするなど）に反応して動くページ</strong>に挑戦します。
+            たとえば下のように、置いたもの（蝶や小さなキャラクター）がマウスに反応して動き回る、といったことができるようになります。
+        </div>
+        <figure>
+            <video src="./res/webpage_sample2.mp4" controls autoplay loop muted playsinline style="max-width:100%;" aria-label="次回の見本：花畑と家のページで、蝶や小さなキャラクターがマウス操作に反応して動く様子">
+                お使いのブラウザは動画の再生に対応していません。
+            </video>
+            <figcaption>次回のイメージ（<code class="inline">res/webpage_sample2.mp4</code>）</figcaption>
+        </figure>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <!-- ============================================
+         セクション7: HTML を GitHub Pages で公開する
+         ============================================ -->
+    <section id="s7" class="hands-on">
+        <h2><span class="section-number">7</span>HTML を GitHub Pages で公開する</h2>
+
+        <p>公開のしかたは、前回 CL-12 で Markdown を公開したときと <strong>同じ手順</strong>です。
+        今回は <strong>Markdown ファイルの代わりに <code class="inline">index.html</code> を置く</strong>だけ。</p>
+
+        <ol class="step-list">
+            <li>GitHub で <strong>新しいリポジトリ</strong>を作る（<strong>Public＝公開</strong>）。前回作ったものを使ってもよい。</li>
+            <li>§6 で作った <code class="inline">index.html</code> を、そのリポジトリに置く（アップロード）。</li>
+            <li><strong>Settings → Pages</strong> で公開元を選ぶ。</li>
+            <li><code class="inline">https://（ユーザー名）.github.io/（リポジトリ名）/</code> を開くと、HTML がそのまま Web ページとして表示される。</li>
+        </ol>
+
+        <div class="callout note">
+            <strong class="label">📎 Markdown との違い:</strong>
+            HTML は <strong>そのまま Web ページとして表示</strong>されます（変換の設定がいらない）。
+            画像を使う場合は、<code class="inline">index.html</code> と同じリポジトリに画像ファイルも一緒に置くこと。
+        </div>
+
+        <div class="callout warning">
+            <strong class="label">⚠ 公開＝世界中から見える:</strong>
+            個人情報や他人の著作物は載せないこと（CL-11 §5 の考え方と同じ）。
+        </div>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <!-- ============================================
+         セクション8: まとめ・課題と締切・次回予告
+         ============================================ -->
+    <section id="s8">
+        <h2><span class="section-number">8</span>まとめ・課題と締切・次回予告</h2>
+
+        <h3>今回のまとめ</h3>
+        <ul>
+            <li>Webページは、ブラウザが <strong>サーバーからデータを受け取り（リクエスト→レスポンス）、レンダリングして表示</strong>したもの。</li>
+            <li>そのデータの中心が <strong>HTML</strong>。タグの入れ子で <strong>構造</strong>を作り、<strong>属性</strong>で表示や挙動が変わる。</li>
+            <li>見出し・リスト・表・リンク・画像・動画・ボタンなど、代表的なタグを書いてみた（特殊な文字はエスケープで表示）。</li>
+            <li><code class="inline">style</code> 属性で <strong>見た目・座標</strong>を指定し、画像を重ねて表示してみた（後から書いたものが上）。</li>
+            <li>作った <code class="inline">index.html</code> は、GitHub Pages で <strong>そのまま公開</strong>できる。</li>
+        </ul>
+
+        <h3>課題</h3>
+        <div class="assignment">
+            <span class="badge">課題：HTML でページを公開</span>
+            <h4>HTML で作ったページを GitHub Pages で公開</h4>
+            <ul>
+                <li>見出し・リスト・リンク・画像などを使った <code class="inline">index.html</code> を作る。</li>
+                <li>GitHub Pages で公開し、<strong>公開された URL</strong> を提出する。</li>
+                <li>個人情報・他人の著作物は載せない。</li>
+            </ul>
+            <p class="deadline">締切：7月6日(月) 22:00</p>
+            <p>提出はこちら：<a href="https://forms.gle/JeekTGEtcV6ofkiE9" target="_blank">課題提出フォーム（Google Forms）</a></p>
+            <p class="note-text">※ 提出には <strong>名城大学の Google アカウント</strong>でのログインが必要です。</p>
+        </div>
+
+        <h3>次回：CL-14（7月9日(木) E-504 対面）</h3>
+        <p><strong>Git</strong> による「変更の履歴管理」を少し体験し、公開したページを修正してみます。</p>
+
+        <a class="back-to-top" href="#top">↑ TOPへ</a>
+    </section>
+
+    <footer>
+        <p>2026 名城大学 情報工学部 — コンピュータリテラシー</p>
+    </footer>
+
+    <script>
+        // §3 の「▼ HTML」ソース表示：各サンプルの HTML ファイル自体を読み込み、
+        // テキスト（ソースコード）として表示する。
+        // ファイルを書き換えて再読み込みすると、ここの表示も最新の内容に更新される。
+        // ※ ブラウザで直接ファイルを開いた（file://）場合など、読み込めない環境では
+        //   あらかじめ書いてある内容（fallback）がそのまま表示される。
+        document.querySelectorAll('pre.src-view[data-src]').forEach(function (pre) {
+            fetch(pre.getAttribute('data-src'))
+                .then(function (res) { return res.text(); })
+                .then(function (text) { pre.textContent = text.replace(/\s+$/, ''); })
+                .catch(function () { /* 取得できないときは fallback 表示のまま */ });
+        });
+
+        // 折りたたみ小節（details.lesson）を開いたとき、中の「表示結果」枠の高さを合わせ直す。
+        // ※ 閉じたまま読み込まれた iframe は高さが正しく計算されないため、開いた時に再計算する。
+        function fitFrame(f) {
+            try {
+                var d = f.contentWindow.document;
+                f.style.height = (d.body.scrollHeight + 36) + 'px';
+            } catch (e) { /* 別オリジン等で読めない場合は何もしない */ }
+        }
+        document.querySelectorAll('details.lesson').forEach(function (det) {
+            det.addEventListener('toggle', function () {
+                if (!det.open) return;
+                det.querySelectorAll('iframe.demo-frame').forEach(function (f) {
+                    fitFrame(f);
+                    setTimeout(function () { fitFrame(f); }, 80);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
